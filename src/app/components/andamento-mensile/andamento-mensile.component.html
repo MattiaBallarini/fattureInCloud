@@ -6,7 +6,14 @@
         <td *ngFor="let mese of anno"
         (mousedown)="mousePremuto()"
         (mouseover)="mouseOver()"
-        (window:mouseup)="mouseUp()">{{mese.documenti}} doc. <br> {{mese.importo}}</td>
+        (window:mouseup)="mouseUp()">
+            <div class="containerMese">
+                <div class="livello" [ngStyle]="{'height.%': (mese.importo*100)/importoMax}"></div>
+                <div class="contenutoMese">
+                    <span>{{mese.documenti}} doc.</span> <br> <span>{{mese.importo | currency: 'EUR' : 'symbol' : '1.0-0'}}</span>
+                </div>
+            </div>
+        </td>
     </tr>
     </table> 
 

@@ -1,21 +1,26 @@
 //importo il font Inter
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;502&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
 
 $grigioDoc: #6F7E86;
 $verdeImporto: #00875A;
 $bluMese: #0D97D5;
+$coloreLivello: #E0F1EB;
 
 
 *{
     font-family: 'Inter', sans-serif;
     font-style: normal;
     font-size: 12px;
+    box-sizing: border-box; //per dare la dimensione effettiva di ogni elemento, compreso di padding e border
 }
 
 table, th, td {
     font-weight:normal;
-    border: 1px solid #EBECF0;
-    border-collapse: collapse;
+
+    border-collapse: separate;
+    border: 1px solid rgba(235, 237, 238, 0.7);
+    border-spacing: 0px;
+
     text-align: left;
     line-height: 18px;
 }
@@ -27,12 +32,16 @@ table{
         width: 80px;
         height: 29px;
         color: $bluMese;
+        padding: 5px 8px;
+        font-weight: 500;
     }
 
     td{
+        padding: 0;
         cursor: pointer;
         width: 80px;
         height: 81px;
+        border-bottom: 3px solid $bluMese;
 
         //disabilito la selezione del testo
         -webkit-touch-callout: none; //iOS Safari
@@ -41,10 +50,38 @@ table{
         -ms-user-select: none; //Explorer
         user-select: none; 
     }
+
 }
 
-th, td{
-    padding: 5px 8px;
+.containerMese{
+    width: 100%;
+    height: 100%;
+    position: relative;
+
 }
 
+.contenutoMese{
+    position: absolute;
+    left: 8px;
+    bottom: 7px;
 
+    span:first-child{
+        font-weight: 400;
+        color: $grigioDoc;
+    }
+
+    span:last-child{
+        color: $verdeImporto;
+    }
+
+}
+
+.livello{
+    width: 100%;
+    height: 0%;
+    background-color: $coloreLivello;
+    position: absolute;
+    bottom: 0;
+    z-index: -100;
+    transition: height 2s;
+}

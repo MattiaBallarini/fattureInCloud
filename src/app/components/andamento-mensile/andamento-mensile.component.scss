@@ -41,8 +41,6 @@ table{
         cursor: pointer;
         width: 80px;
         height: 81px;
-        border-bottom: 3px solid $bluMese;
-        z-index: 100;
 
         //disabilito la selezione del testo
         -webkit-touch-callout: none; //iOS Safari
@@ -54,40 +52,49 @@ table{
 
 }
 
-
+//contenuto della cella
 .containerMese{
     width: 100%;
     height: 100%;
     position: relative;
+    z-index: 10;
+    border-bottom: 3px solid $bluMese;
 
 }
 
-.contenutoMese{
+//cella selezionata
+.selezionato{
+    border-bottom: 4px solid $verdeImporto;
+}
+
+//documenti e importi
+.datiMese{
     position: absolute;
     left: 8px;
     bottom: 7px;
+    z-index: -1;
 
     span:first-child{
         font-weight: 400;
         color: $grigioDoc;
+        z-index: -1;
     }
 
     span:last-child{
         color: $verdeImporto;
+        z-index: -1;
     }
 
 }
 
+//livello proporzionale all'importo
 .livello{
     width: 100%;
     height: 0%;
     background-color: $coloreLivello;
     position: absolute;
     bottom: 0;
-    z-index: -100;
+    z-index: -10;
     transition: height 2s;
 }
 
-.selezionato{
-    border-bottom: 3px solid $verdeImporto !important;
-}

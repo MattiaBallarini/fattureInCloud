@@ -3,14 +3,16 @@
         <th *ngFor="let m of andamentoService.mesi">{{m}}</th>
     </tr>
     <tr>
-        <td *ngFor="let mese of anno; let i = index"
-        (mousedown)="mousePremuto(mese)"
-        (mouseover)="mouseOver(mese)"
-        (mouseup)="mouseUp()"
-        [class.selezionato]="mese.selezionato">
-            <div class="containerMese">
+        <!-- con window aggiunto all'evento mouseup specifico che il metodo mouseRilasciato() deve essere richiamato quando
+            rilascio il mouse a livello globale della finestra, non solo quando mi trovo sul component specifico -->
+        <td *ngFor="let mese of anno">
+            <div class="containerMese"
+            (mousedown)="mousePremuto(mese)"
+            (mouseover)="mouseOver(mese)"
+            (window:mouseup)="mouseRilasciato()" 
+            [class.selezionato]="mese.selezionato">
                 <div class="livello" [ngStyle]="{'height.%': (mese.importo*100)/importoMax}"></div>
-                <div class="contenutoMese">
+                <div class="datiMese">
                     <span>{{mese.documenti}} doc.</span> <br> <span>{{mese.importo | currency: 'EUR' : 'symbol' : '1.0-0'}}</span>
                 </div>
             </div>

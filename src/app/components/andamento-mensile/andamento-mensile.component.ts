@@ -23,34 +23,40 @@ export class AndamentoMensileComponent implements OnInit {
   ngOnInit(): void {
     this.importi = [];
 
+    //richiamo i dati
     this.andamentoService.getAnno().subscribe({
       next: risultato =>{
         this.anno = risultato.mesi;
+
         this.anno.forEach((e) => {
           this.importi?.push(e.importo)//pusho gli importi mensili importi nell'array
-          e.selezionato = false; //porto a false selezionato (quando selezionato diventa true il mese cambia classe CSS e diventa verse)
+          e.selezionato = false; //porto a false selezionato (quando selezionato diventa true il mese cambia classe CSS e diventa verde)
         }); 
-        this.importoMax = Math.max(...this.importi); //ricavo l'importo maggiore
+
+        this.importoMax = Math.max(...this.importi); //ricavo l'importo maggiore dall'array
       }
     })
   }
 
+  //metodo richiamato quando si preme il mouse su un componente
   mousePremuto(mese: Mese) : void{
     this.premuto = true;
     if(this.premuto){
-      this.azzeraSelezioni(this.anno!)
-      mese.selezionato = true;
+      this.azzeraSelezioni(this.anno!); //azzero tutti gli elementi selezionati
+      mese.selezionato = true; //seleziono l'elemento premuto
     }
   }
 
+  //metodo richiamato quando tenendo premuto passo con il cursore sopra un componente
   mouseOver(mese: Mese) : void{
+    //controllo se si sta tenendo premuto il mouse
     if(this.premuto){
-      mese.selezionato = !mese.selezionato;
+      mese.selezionato = true;
     }
     
   }
 
-  mouseUp() : void{
+  mouseRilasciato() : void{
     this.premuto = false;
   }
 

@@ -11,12 +11,17 @@
             (mouseover)="mouseOver(mese)"
             (window:mouseup)="mouseRilasciato()" 
             [class.selezionato]="mese.selezionato">
-                <div class="livello" [ngStyle]="{'height.%': (mese.importo*100)/importoMax}"></div>
+                <!-- altezza proporzionale all'importo massimo. Proporzione:  mese.importo : x = importoMax : 100   -->
+                <!-- <div class="livello" [ngStyle]="{'height.%': (mese.importo*100)/importoMax}"></div> -->
+                <div [@crescita]="{value: 'massima', params: {altezza: mese.altezza}}" class="livello"></div>
                 <div class="datiMese">
                     <span>{{mese.documenti}} doc.</span> <br> <span>{{mese.importo | currency: 'EUR' : 'symbol' : '1.0-0'}}</span>
                 </div>
             </div>
         </td>
     </tr>
-    </table> 
+    </table>
+
+    <!-- info per l'utente sulla selezione -->
+    <h3>{{info}}</h3>
 

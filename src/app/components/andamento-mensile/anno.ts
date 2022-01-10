@@ -6,4 +6,5 @@ export interface Mese {
     documenti: number;
     importo: number;
     selezionato: boolean;
+    altezza: number;
 }

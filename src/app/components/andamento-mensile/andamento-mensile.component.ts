@@ -1,13 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { AndamentoMensileService } from './andamento-mensile.service';
-import { Anno, Mese } from './anno';
+import { Mese } from './anno';
+import { trigger, keyframes, style, state, animate, transition } from '@angular/animations';
 
 @Component({
   selector: 'app-andamento-mensile',
   templateUrl: './andamento-mensile.component.html',
-  styleUrls: ['./andamento-mensile.component.scss']
+  styleUrls: ['./andamento-mensile.component.scss'],
+  animations: [
+    trigger('crescita', [
+      state('massima', style(
+        { height: "{{altezza}}%"}), { params: { altezza: '0' } }
+        ),
+      transition('* => massima', animate('500ms'))
+    ])
+  ]
 })
+
 export class AndamentoMensileComponent implements OnInit {
 
   anno?: Mese[];
@@ -16,8 +25,10 @@ export class AndamentoMensileComponent implements OnInit {
   importi: number[] = []; //array che contiene tutti gli importi annuali (su cui verrà eseguito il metodo Math.max per ricavare l'importo maggiore)
   importoMax: number = 0; //importo maggiore di tutto l'anno
 
+  info?: string; //info per l'utente sulla selezione
 
-  constructor( public andamentoService : AndamentoMensileService) { }
+
+  constructor( public andamentoService : AndamentoMensileService) {}
 
 
   ngOnInit(): void {
@@ -34,9 +45,14 @@ export class AndamentoMensileComponent implements OnInit {
         }); 
 
         this.importoMax = Math.max(...this.importi); //ricavo l'importo maggiore dall'array
+
+        this.setAltezza(this.anno, this.importoMax);
       }
     })
+
   }
+
+
 
   //metodo richiamato quando si preme il mouse su un componente
   mousePremuto(mese: Mese) : void{
@@ -44,6 +60,8 @@ export class AndamentoMensileComponent implements OnInit {
     if(this.premuto){
       this.azzeraSelezioni(this.anno!); //azzero tutti gli elementi selezionati
       mese.selezionato = true; //seleziono l'elemento premuto
+
+      this.info = "Trascina per selezionare un intervallo di mesi";
     }
   }
 
@@ -52,12 +70,15 @@ export class AndamentoMensileComponent implements OnInit {
     //controllo se si sta tenendo premuto il mouse
     if(this.premuto){
       mese.selezionato = true;
+
+      this.info = "Rilascia il mouse per confermare la selezione";
     }
     
   }
 
   mouseRilasciato() : void{
     this.premuto = false;
+    this.info = "";
   }
 
 
@@ -68,6 +89,13 @@ export class AndamentoMensileComponent implements OnInit {
     })
   }
 
+  setAltezza(anno: Mese[], numeroMassimo: number) : void{
+    anno.forEach((e)=>{
+      //mi ricavo l'altezza del mese facendo la proporzione   importo : x = importoMax : 100   , poi utilizzo toFixed() per tenere solo 3 valori decimali
+      //infine converto tutto in Number (perché toFixed converte in stringa)
+      e.altezza = Number( ((e.importo*100)/numeroMassimo).toFixed(3) );
+    })
+  }
 
 
 }

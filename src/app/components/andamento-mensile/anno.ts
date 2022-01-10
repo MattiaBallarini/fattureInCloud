@@ -1,5 +1,5 @@
 export interface Anno {
-    mese: Mese[];
+    mesi: Mese[];
 }
 
 export interface Mese {

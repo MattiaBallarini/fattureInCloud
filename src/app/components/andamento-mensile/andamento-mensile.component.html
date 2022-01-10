@@ -3,7 +3,10 @@
         <th *ngFor="let m of andamentoService.mesi">{{m}}</th>
     </tr>
     <tr>
-        <td *ngFor="let m of andamentoService.mesi">{{m}}</td>
+        <td *ngFor="let mese of anno"
+        (mousedown)="mousePremuto()"
+        (mouseover)="mouseOver()"
+        (window:mouseup)="mouseUp()">{{mese.documenti}} doc. <br> {{mese.importo}}</td>
     </tr>
     </table> 
 

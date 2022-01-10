@@ -1,0 +1,50 @@
+//importo il font Inter
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;502&display=swap');
+
+$grigioDoc: #6F7E86;
+$verdeImporto: #00875A;
+$bluMese: #0D97D5;
+
+
+*{
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-size: 12px;
+}
+
+table, th, td {
+    font-weight:normal;
+    border: 1px solid #EBECF0;
+    border-collapse: collapse;
+    text-align: left;
+    line-height: 18px;
+}
+
+table{
+    width: 100%;
+
+    th{
+        width: 80px;
+        height: 29px;
+        color: $bluMese;
+    }
+
+    td{
+        cursor: pointer;
+        width: 80px;
+        height: 81px;
+
+        //disabilito la selezione del testo
+        -webkit-touch-callout: none; //iOS Safari
+        -webkit-user-select: none; //Safari
+        -moz-user-select: none; //vecchie versioni di Firefox
+        -ms-user-select: none; //Explorer
+        user-select: none; 
+    }
+}
+
+th, td{
+    padding: 5px 8px;
+}
+
+

@@ -98,9 +98,9 @@ export class AndamentoMensileComponent implements OnInit {
 
   setAltezza(anno: Mese[], numeroMassimo: number) : void{
     anno.forEach((e)=>{
-      //mi ricavo l'altezza del mese facendo la proporzione   importo : x = importoMax : 100   , poi utilizzo toFixed() per tenere solo 3 valori decimali
+      //mi ricavo l'altezza del mese facendo la proporzione   importo : x = importoMax : 100   , poi utilizzo toFixed() per tenere solo 4 valori decimali
       //infine converto tutto in Number (perché toFixed converte in stringa)
-      e.altezza = Number( ((e.importo*100)/numeroMassimo).toFixed(3) );
+      e.altezza = Number( ((e.importo*100)/numeroMassimo).toFixed(4) );
     })
   }
 

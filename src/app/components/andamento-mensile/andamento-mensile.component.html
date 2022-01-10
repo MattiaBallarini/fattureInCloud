@@ -3,10 +3,11 @@
         <th *ngFor="let m of andamentoService.mesi">{{m}}</th>
     </tr>
     <tr>
-        <td *ngFor="let mese of anno"
-        (mousedown)="mousePremuto()"
-        (mouseover)="mouseOver()"
-        (window:mouseup)="mouseUp()">
+        <td *ngFor="let mese of anno; let i = index"
+        (mousedown)="mousePremuto(mese)"
+        (mouseover)="mouseOver(mese)"
+        (mouseup)="mouseUp()"
+        [class.selezionato]="mese.selezionato">
             <div class="containerMese">
                 <div class="livello" [ngStyle]="{'height.%': (mese.importo*100)/importoMax}"></div>
                 <div class="contenutoMese">

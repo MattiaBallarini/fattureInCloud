@@ -42,16 +42,18 @@ table{
         width: 80px;
         height: 81px;
         border-bottom: 3px solid $bluMese;
+        z-index: 100;
 
         //disabilito la selezione del testo
         -webkit-touch-callout: none; //iOS Safari
         -webkit-user-select: none; //Safari
         -moz-user-select: none; //vecchie versioni di Firefox
         -ms-user-select: none; //Explorer
-        user-select: none; 
+        user-select: none;
     }
 
 }
+
 
 .containerMese{
     width: 100%;
@@ -84,4 +86,8 @@ table{
     bottom: 0;
     z-index: -100;
     transition: height 2s;
+}
+
+.selezionato{
+    border-bottom: 3px solid $verdeImporto !important;
 }

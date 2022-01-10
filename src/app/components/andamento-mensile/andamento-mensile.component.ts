@@ -1,19 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { AndamentoMensileService } from './andamento-mensile.service';
 import { Mese } from './anno';
-import { trigger, keyframes, style, state, animate, transition } from '@angular/animations';
+import { trigger, style, state, animate, transition } from '@angular/animations';
 
 @Component({
   selector: 'app-andamento-mensile',
   templateUrl: './andamento-mensile.component.html',
   styleUrls: ['./andamento-mensile.component.scss'],
   animations: [
-    trigger('crescita', [
-      state('massima', style(
-        { height: "{{altezza}}%"}), { params: { altezza: '0' } }
-        ),
-      transition('* => massima', animate('500ms'))
-    ])
+    // trigger('crescita', [
+    //   state('massima', style(
+    //     { height: "{{altezza}}%"}), { params: { altezza: '0' } }
+    //     ),
+    //   transition('* => massima', animate("0.5s"))
+    // ])
+
+      trigger('crescita', [
+        transition(':enter', [
+          style({ transform: 'translate3d(0,100%,0)'}),
+          animate(500, style({ transform: 'translate3d(0, 0, 0)' }))]
+          )
+      ])
   ]
 })
 
@@ -46,10 +53,10 @@ export class AndamentoMensileComponent implements OnInit {
 
         this.importoMax = Math.max(...this.importi); //ricavo l'importo maggiore dall'array
 
-        this.setAltezza(this.anno, this.importoMax);
+        this.setAltezza(this.anno, this.importoMax); //ricavo l'altezza in proporzione a importoMax
+        
       }
     })
-
   }
 
 

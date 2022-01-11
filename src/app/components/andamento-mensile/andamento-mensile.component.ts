@@ -1,20 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AndamentoMensileService } from './andamento-mensile.service';
 import { Mese } from './anno';
-import { trigger, style, state, animate, transition } from '@angular/animations';
+import { trigger, style, animate, transition } from '@angular/animations';
 
 @Component({
   selector: 'app-andamento-mensile',
   templateUrl: './andamento-mensile.component.html',
   styleUrls: ['./andamento-mensile.component.scss'],
   animations: [
-    // trigger('crescita', [
-    //   state('massima', style(
-    //     { height: "{{altezza}}%"}), { params: { altezza: '0' } }
-    //     ),
-    //   transition('* => massima', animate("0.5s"))
-    // ])
-
       trigger('crescita', [
         transition(':enter', [
           style({ transform: 'translate3d(0,100%,0)'}),

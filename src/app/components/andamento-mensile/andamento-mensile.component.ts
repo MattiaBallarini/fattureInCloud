@@ -34,6 +34,8 @@ export class AndamentoMensileComponent implements OnInit {
 
   info?: string; //info per l'utente sulla selezione
 
+  mesiSelezionati: any[] = [];
+
 
   constructor( public andamentoService : AndamentoMensileService) {}
 
@@ -62,25 +64,40 @@ export class AndamentoMensileComponent implements OnInit {
 
 
   //metodo richiamato quando si preme il mouse su un componente
-  mousePremuto(mese: Mese) : void{
+  mousePremuto(mese: Mese, indice: number) : void{
+    this.mesiSelezionati = []; //svuoto l'array dei mesi selezionati
+
     this.premuto = true;
     if(this.premuto){
       this.azzeraSelezioni(this.anno!); //azzero tutti gli elementi selezionati
       mese.selezionato = true; //seleziono l'elemento premuto
 
-      this.info = "Trascina per selezionare un intervallo di mesi";
+      this.info = "Trascina per selezionare un intervallo di mesi"; //scrivo le info per l'utente
+      this.mesiSelezionati.push(this.andamentoService.mesi[indice]); //popolo l'array dei mesi selezionati che viene stampato sotto il componente
     }
   }
 
   //metodo richiamato quando tenendo premuto passo con il cursore sopra un componente
-  mouseOver(mese: Mese) : void{
+  mouseOver(mese: Mese, indice: number) : void{
     //controllo se si sta tenendo premuto il mouse
     if(this.premuto){
       mese.selezionato = true;
 
-      this.info = "Rilascia il mouse per confermare la selezione";
+      this.info = "Rilascia il mouse per confermare la selezione"; //scrivo le info per l'utente
+
+      //popolo l'array dei mesi selezionati che viene stampato sotto il componente
+      let presente = this.mesiSelezionati.find( //Verifico che il mese non sia già presente nell'array dei mesi selezionati
+        (e) => e.numero === this.andamentoService.mesi[indice].numero
+      )
+      if(!presente){ //se non è presente, allora pusho
+        this.mesiSelezionati.push(this.andamentoService.mesi[indice]);
+
+        //riordino l'array
+        this.mesiSelezionati.sort(function(a, b) { 
+          return a.numero - b.numero;
+        });
+      }
     }
-    
   }
 
   mouseRilasciato() : void{
